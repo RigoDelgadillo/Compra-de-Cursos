@@ -19,6 +19,13 @@ function eventListeners() {
         articulosCarrito = []; // Vacía el arreglo donde estaban todos los productos del carrito
         carritoHTML();
     })
+
+    // Imprimir carrito con LocalStorage
+    document.addEventListener('DOMContentLoaded', () => {
+        articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) || [];
+
+        carritoHTML();
+    });
 }
 // Funciones
 
@@ -101,6 +108,13 @@ function carritoHTML (){
         contenedorCarrito.appendChild(row);
     })
     
+    // Subir a LocalStorage
+    sincronizarLocalStorage()
+}
+
+// LocalStorage
+function sincronizarLocalStorage() {
+    localStorage.setItem( 'carrito', JSON.stringify(articulosCarrito) );
 }
 function limpiarHTML() {
     while(contenedorCarrito.firstChild) {
